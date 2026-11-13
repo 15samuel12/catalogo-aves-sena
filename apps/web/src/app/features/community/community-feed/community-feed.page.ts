@@ -1,4 +1,5 @@
-import { Component, inject, signal } from "@angular/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, inject, OnDestroy, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CommunityApiService } from "../../../core/api/community-api.service";
@@ -15,7 +16,7 @@ import {
   styleUrl: "./community-feed.page.scss",
 })
 /** Orquesta las acciones del feed sin duplicar reglas de autorización de Community. */
-export class CommunityFeedPageComponent {
+export class CommunityFeedPageComponent implements OnDestroy {
   private readonly api = inject(CommunityApiService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
@@ -36,6 +37,7 @@ export class CommunityFeedPageComponent {
   });
   readonly perPageOptions = [8, 12, 20];
   private focusedPostId?: string;
+  private commentsRefreshTimer?: ReturnType<typeof setInterval>;
   postBody = "";
   commentBody = "";
 
@@ -47,6 +49,10 @@ export class CommunityFeedPageComponent {
         this.focusedPostId,
       );
     });
+  }
+  /** Detiene el sondeo al abandonar Comunidad para no mantener solicitudes activas. */
+  ngOnDestroy(): void {
+    this.stopCommentsPolling();
   }
   /** Recarga el feed público después de una mutación exitosa o al cambiar de página. */
   loadFeed(page = this.pagination().currentPage, postId?: string): void {
@@ -121,9 +127,12 @@ export class CommunityFeedPageComponent {
         this.composerOpen.set(false);
         this.loadFeed();
       },
-      error: () =>
+      error: (error: HttpErrorResponse) =>
         this.actionError.set(
-          "No fue posible publicar. Tu sesión puede haber expirado.",
+          this.describeContentActionError(
+            error,
+            "No fue posible publicar. Tu sesión puede haber expirado.",
+          ),
         ),
     });
   }
@@ -160,7 +169,12 @@ export class CommunityFeedPageComponent {
     const opening = this.commentingPostId() !== postId;
     this.commentingPostId.set(opening ? postId : null);
     this.commentBody = "";
-    if (opening) this.loadComments(postId);
+    if (opening) {
+      this.loadComments(postId);
+      this.startCommentsPolling(postId);
+      return;
+    }
+    this.stopCommentsPolling();
   }
   /** Envía un comentario corto y cierra su formulario al completar. */
   sendComment(postId: string): void {
@@ -172,7 +186,13 @@ export class CommunityFeedPageComponent {
         this.loadComments(postId);
         this.loadFeed();
       },
-      error: () => this.actionError.set("No fue posible enviar el comentario."),
+      error: (error: HttpErrorResponse) =>
+        this.actionError.set(
+          this.describeContentActionError(
+            error,
+            "No fue posible enviar el comentario.",
+          ),
+        ),
     });
   }
   /** Copia una URL estable de la publicación para compartirla sin depender de una red externa. */
@@ -187,13 +207,46 @@ export class CommunityFeedPageComponent {
     this.api
       .comments(postId)
       .subscribe({
-        next: (comments) =>
+        next: (comments) => {
           this.commentsByPost.update((current) => ({
             ...current,
             [postId]: comments,
-          })),
+          }));
+          this.feed.update((posts) =>
+            posts.map((post) =>
+              post.id === postId
+                ? { ...post, comments_count: comments.length }
+                : post,
+            ),
+          );
+        },
         error: () =>
           this.actionError.set("No fue posible cargar los comentarios."),
       });
+  }
+  /** Consulta el hilo abierto cada 15 segundos; no requiere WebSockets ni cambios en Laravel. */
+  private startCommentsPolling(postId: string): void {
+    this.stopCommentsPolling();
+    this.commentsRefreshTimer = setInterval(() => {
+      if (this.commentingPostId() === postId) this.loadComments(postId);
+    }, 15_000);
+  }
+  /** Cancela el temporizador al cerrar el hilo o destruir la pantalla. */
+  private stopCommentsPolling(): void {
+    if (this.commentsRefreshTimer) clearInterval(this.commentsRefreshTimer);
+    this.commentsRefreshTimer = undefined;
+  }
+
+  /** Muestra el detalle de validación de Community sin revelar respuestas técnicas inesperadas. */
+  private describeContentActionError(
+    error: HttpErrorResponse,
+    fallback: string,
+  ): string {
+    if (error.status !== 422) return fallback;
+
+    const message = error.error?.errors?.body?.[0];
+    return typeof message === "string"
+      ? message
+      : "El contenido contiene lenguaje no permitido.";
   }
 }

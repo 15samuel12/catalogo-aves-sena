@@ -17,4 +17,5 @@ export class CatalogApiService {
   speciesById(id: string): Observable<Species> {
     return this.http.get<Species>(`/api/catalog/v1/species/${id}`);
   }
+
 }

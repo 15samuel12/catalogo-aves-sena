@@ -30,7 +30,11 @@
     <div class="col-md-6 col-xl-4">
       <a class="species-card" [routerLink]="['/especies', s.id]"
         ><div class="species-art">
-          <span>⌁</span><small>{{ s.sensitivity }}</small>
+          <img
+            [src]="speciesImageUrl(s)"
+            [alt]="'Imagen de ' + s.common_name"
+          />
+          <small>{{ s.sensitivity }}</small>
         </div>
         <div class="p-4">
           <p class="mini-label">{{ s.habitat || "Catálogo de Aves" }}</p>

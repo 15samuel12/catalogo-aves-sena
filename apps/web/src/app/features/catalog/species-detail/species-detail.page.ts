@@ -2,6 +2,7 @@ import { Component, inject, signal } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CatalogApiService } from "../../../core/api/catalog-api.service";
 import { Species } from "../../../shared/models/catalog.models";
+import { speciesImageUrl } from "../../../shared/species-image";
 import { seedSpecies } from "../../shared/seed-species";
 
 @Component({
@@ -15,6 +16,7 @@ export class SpeciesDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly catalogApi = inject(CatalogApiService);
   readonly selectedSpecies = signal<Species>(seedSpecies[0]);
+  readonly speciesImageUrl = speciesImageUrl;
 
   constructor() {
     this.route.paramMap.subscribe((params) => {

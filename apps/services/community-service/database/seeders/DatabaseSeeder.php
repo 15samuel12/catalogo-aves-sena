@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $now = now();
+        $this->call(BlockedTermSeeder::class);
+
         $messages = [
             'El amanecer estuvo muy quieto hasta que empezaron a responder los primeros llamados desde el borde del bosque.',
             'Hoy confirmé lo útil que es quedarse unos minutos en silencio antes de avanzar por el sendero.',

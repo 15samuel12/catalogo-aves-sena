@@ -20,7 +20,13 @@ export interface PaginatedResponse<T> {
 }
 
 /** Comentario público asociado a una publicación del feed. */
-export interface CommunityComment { id: string; post_id: string; author_id: string; body: string; created_at: string; }
+export interface CommunityComment {
+  id: string;
+  post_id: string;
+  author_id: string;
+  body: string;
+  created_at: string;
+}
 
 /** Notificación persistida por Community para el usuario autenticado actual. */
 export interface Notification {

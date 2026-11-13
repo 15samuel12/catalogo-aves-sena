@@ -3,6 +3,7 @@ export interface Species {
   id: string;
   common_name: string;
   scientific_name: string;
+  image_url?: string;
   sensitivity: "EXACT" | "APPROXIMATE" | "HIDDEN";
   description?: string;
   habitat?: string;

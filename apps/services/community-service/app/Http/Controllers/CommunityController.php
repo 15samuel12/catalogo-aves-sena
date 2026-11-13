@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\NoProfanity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -38,7 +39,7 @@ class CommunityController extends Controller
     public function post(Request $request)
     {
         $data = $request->validate([
-            'body' => 'nullable|string|max:4000',
+            'body' => ['nullable', 'string', 'max:4000', new NoProfanity],
             'reference_type' => 'sometimes|in:sighting,route,trip,place,species,general',
             'reference_id' => 'sometimes|string|max:26',
             'visibility' => 'sometimes|in:PUBLIC,FOLLOWERS,PRIVATE',
@@ -63,7 +64,9 @@ class CommunityController extends Controller
     /** Persiste un comentario y registra un evento local de notificación. */
     public function comment(Request $request, string $post)
     {
-        $data = $request->validate(['body' => 'required|string|max:2000']);
+        $data = $request->validate([
+            'body' => ['required', 'string', 'max:2000', new NoProfanity],
+        ]);
         $id = (string) Str::ulid();
 
         DB::table('comments')->insert([

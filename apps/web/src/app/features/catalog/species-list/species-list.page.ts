@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CatalogApiService } from "../../../core/api/catalog-api.service";
 import { Species } from "../../../shared/models/catalog.models";
+import { speciesImageUrl } from "../../../shared/species-image";
 import { seedSpecies } from "../../shared/seed-species";
 
 @Component({
@@ -17,6 +18,7 @@ export class SpeciesListPageComponent {
   private readonly route = inject(ActivatedRoute);
   readonly species = signal<Species[]>(seedSpecies);
   readonly catalogError = signal(false);
+  readonly speciesImageUrl = speciesImageUrl;
   searchText = "";
 
   constructor() {

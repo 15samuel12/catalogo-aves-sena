@@ -1,0 +1,190 @@
+<mxfile host="app.diagrams.net" agent="Codex">
+  <diagram id="catalogo-aves-completo" name="Modelo relacional">
+    <mxGraphModel dx="1036" dy="519" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3700" pageHeight="2300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1B5E20;" value="MODELO RELACIONAL — CATÁLOGO DE AVES" vertex="1">
+          <mxGeometry height="40" width="850" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#455A64;" value="Tablas creadas por las migraciones de aplicación. Se omiten: cache, cache_locks, jobs, job_batches y failed_jobs." vertex="1">
+          <mxGeometry height="25" width="1200" x="40" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;align=left;verticalAlign=middle;spacing=10;fontSize=13;" value="&lt;b&gt;Leyenda&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#2E7D32&#39;&gt;Verde: clave primaria (PK)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;Naranja: clave foránea (FK) o referencia lógica (REF)&lt;/font&gt;&lt;br&gt;Línea naranja continua: FK física&lt;br&gt;Línea naranja punteada: relación lógica gestionada por código&lt;br&gt;Cardinalidad: 1 : 0..N" vertex="1">
+          <mxGeometry height="95" width="820" x="2780" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="accountsArea" parent="1" style="swimlane;html=1;rounded=1;startSize=34;fillColor=#E3F2FD;swimlaneFillColor=#0D47A1;strokeColor=#0D47A1;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" value="ACCOUNTS — catalogo_aves_accounts" vertex="1">
+          <mxGeometry height="710" width="790" x="40" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="refresh" parent="accountsArea" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;refresh_tokens&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;FK&lt;/b&gt; user_id : CHAR(26)&lt;/font&gt;&lt;br&gt;token_hash : VARCHAR(64) UK&lt;br&gt;expires_at : TIMESTAMP&lt;br&gt;revoked_at : TIMESTAMP NULL&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="210" width="330" x="410" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="users" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;users&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;name : VARCHAR(255)&lt;br&gt;email : VARCHAR(255) UK&lt;br&gt;email_verified_at : TIMESTAMP NULL&lt;br&gt;password : VARCHAR(255)&lt;br&gt;remember_token : VARCHAR(100) NULL&lt;br&gt;role : VARCHAR(255) DEFAULT &#39;user&#39;&lt;br&gt;bio : TEXT NULL&lt;br&gt;general_location : VARCHAR(255) NULL&lt;br&gt;privacy_settings : JSON NULL&lt;br&gt;preferences : JSON NULL&lt;br&gt;avatar_path : VARCHAR(255) NULL&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="400" width="320" x="70" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="aF56gAUuUGzuXJ3Qrzv0-1" edge="1" parent="1" source="refresh" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="780" y="184.58620689655174" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="reset" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;password_reset_tokens&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; email : VARCHAR(255)&lt;/font&gt;&lt;br&gt;token : VARCHAR(255)&lt;br&gt;created_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="125" width="330" x="440" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="sessions" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;sessions&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : VARCHAR(255)&lt;/font&gt;&lt;br&gt;user_id : BIGINT UNSIGNED NULL INDEX&lt;br&gt;ip_address : VARCHAR(45) NULL&lt;br&gt;user_agent : TEXT NULL&lt;br&gt;payload : LONGTEXT&lt;br&gt;last_activity : INT INDEX" vertex="1">
+          <mxGeometry height="170" width="320" x="70" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="sessionsNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#EF6C00;fontSize=11;align=center;verticalAlign=middle;" value="`sessions.user_id` es solo un índice; no es FK y su tipo no coincide con `users.id`." vertex="1">
+          <mxGeometry height="75" width="330" x="440" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="catalogArea" parent="1" style="swimlane;html=1;rounded=1;startSize=34;fillColor=#F3E5F5;swimlaneFillColor=#4A148C;strokeColor=#4A148C;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" value="CATALOG — catalogo_aves_catalog" vertex="1">
+          <mxGeometry height="710" width="530" x="880" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="species" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;species&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;common_name : VARCHAR(255)&lt;br&gt;scientific_name : VARCHAR(255) UK&lt;br&gt;taxonomy : JSON NULL&lt;br&gt;description : TEXT NULL&lt;br&gt;size : VARCHAR(255) NULL&lt;br&gt;habitat : TEXT NULL&lt;br&gt;feeding : TEXT NULL&lt;br&gt;distribution : TEXT NULL&lt;br&gt;typical_hours : JSON NULL&lt;br&gt;seasons : JSON NULL&lt;br&gt;similar_species : JSON NULL&lt;br&gt;distinguishing_features : TEXT NULL&lt;br&gt;conservation_status : VARCHAR(255) NULL&lt;br&gt;sensitivity : VARCHAR(255) DEFAULT &#39;EXACT&#39;&lt;br&gt;is_published : TINYINT(1) DEFAULT 1&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="515" width="455" x="900" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="observationArea" parent="1" style="swimlane;html=1;rounded=1;startSize=34;fillColor=#FFF8E1;swimlaneFillColor=#8D6E00;strokeColor=#8D6E00;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" value="OBSERVATION — catalogo_aves_observation" vertex="1">
+          <mxGeometry height="710" width="1050" x="1450" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="sightings" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;sightings&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; user_id : CHAR(26) INDEX&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; species_id : CHAR(26) NULL INDEX&lt;/font&gt;&lt;br&gt;observed_at : TIMESTAMP INDEX&lt;br&gt;individuals : INT UNSIGNED DEFAULT 1&lt;br&gt;behavior : VARCHAR(255) NULL&lt;br&gt;notes : TEXT NULL&lt;br&gt;status : VARCHAR(255) INDEX&lt;br&gt;sensitivity : VARCHAR(255) DEFAULT &#39;HIDDEN&#39;&lt;br&gt;private_lat : DECIMAL(10,7)&lt;br&gt;private_lng : DECIMAL(10,7)&lt;br&gt;private_region : VARCHAR(255) NULL&lt;br&gt;public_lat : DECIMAL(10,7) NULL INDEX&lt;br&gt;public_lng : DECIMAL(10,7) NULL INDEX&lt;br&gt;public_region : VARCHAR(255) NULL&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="500" width="380" x="1485" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="places" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;places&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;name : VARCHAR(255)&lt;br&gt;municipality : VARCHAR(255)&lt;br&gt;department : VARCHAR(255)&lt;br&gt;habitat : VARCHAR(255)&lt;br&gt;description : TEXT&lt;br&gt;latitude : DECIMAL(10,7)&lt;br&gt;longitude : DECIMAL(10,7)&lt;br&gt;is_public : TINYINT(1) DEFAULT 1 INDEX&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="320" width="270" x="1910" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="routes" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;birding_routes&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; place_id : CHAR(26) INDEX&lt;/font&gt;&lt;br&gt;name : VARCHAR(255)&lt;br&gt;difficulty : VARCHAR(255)&lt;br&gt;duration_minutes : SMALLINT UNSIGNED&lt;br&gt;distance_km : DECIMAL(5,2)&lt;br&gt;description : TEXT&lt;br&gt;start_latitude : DECIMAL(10,7)&lt;br&gt;start_longitude : DECIMAL(10,7)&lt;br&gt;is_public : TINYINT(1) DEFAULT 1 INDEX&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="350" width="245" x="2220" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="observationNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#EF6C00;fontSize=11;align=center;verticalAlign=middle;" value="Las coordenadas privadas y públicas se almacenan separadas. `species_id` consulta Catalog para resolver la sensibilidad al publicar." vertex="1">
+          <mxGeometry height="90" width="555" x="1910" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="communityArea" parent="1" style="swimlane;html=1;rounded=1;startSize=34;fillColor=#FCE4EC;swimlaneFillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=16;" value="COMMUNITY — catalogo_aves_community" vertex="1">
+          <mxGeometry height="1170" width="3530" x="40" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="posts" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;posts&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; author_id : CHAR(26) INDEX&lt;/font&gt;&lt;br&gt;body : TEXT NULL&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;reference_type : VARCHAR(255)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;reference_id : CHAR(26)&lt;/font&gt;&lt;br&gt;visibility : VARCHAR(255) DEFAULT &#39;PUBLIC&#39;&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="245" width="305" x="80" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="comments" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;comments&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; post_id : CHAR(26) INDEX&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; author_id : CHAR(26) INDEX&lt;/font&gt;&lt;br&gt;body : TEXT&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="195" width="305" x="435" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="reactions" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;reactions&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : BIGINT UNSIGNED AI&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; post_id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; user_id : CHAR(26)&lt;/font&gt;&lt;br&gt;reaction : VARCHAR(255)&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL&lt;br&gt;UK (post_id, user_id)" vertex="1">
+          <mxGeometry height="220" width="305" x="790" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="follows" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;follows&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : BIGINT UNSIGNED AI&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; follower_id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; followed_id : CHAR(26)&lt;/font&gt;&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL&lt;br&gt;UK (follower_id, followed_id)" vertex="1">
+          <mxGeometry height="195" width="305" x="1145" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="reports" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;reports&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; reporter_id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;target_type : VARCHAR(255)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;target_id : CHAR(26)&lt;/font&gt;&lt;br&gt;reason : VARCHAR(255)&lt;br&gt;detail : TEXT NULL&lt;br&gt;status : VARCHAR(255)&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="245" width="305" x="1500" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="audit" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;audit_records&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; actor_id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;target_type : VARCHAR(255)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;target_id : CHAR(26)&lt;/font&gt;&lt;br&gt;action : VARCHAR(255)&lt;br&gt;reason : TEXT&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="225" width="305" x="1855" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="notifications" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;notifications&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;&lt;b&gt;REF&lt;/b&gt; user_id : CHAR(26) INDEX&lt;/font&gt;&lt;br&gt;type : VARCHAR(255)&lt;br&gt;&lt;font color=&#39;#EF6C00&#39;&gt;reference_id : CHAR(26) NULL&lt;/font&gt;&lt;br&gt;body : TEXT&lt;br&gt;read_at : TIMESTAMP NULL&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL" vertex="1">
+          <mxGeometry height="225" width="305" x="2210" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="blocked" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;align=left;verticalAlign=top;spacing=8;fontSize=12;" value="&lt;b&gt;blocked_terms&lt;/b&gt;&lt;hr&gt;&lt;font color=&#39;#2E7D32&#39;&gt;&lt;b&gt;PK&lt;/b&gt; id : CHAR(26)&lt;/font&gt;&lt;br&gt;term : VARCHAR(120)&lt;br&gt;normalized_term : VARCHAR(120) UK&lt;br&gt;match_type : ENUM(&#39;EXACT&#39;,&#39;PHRASE&#39;,&#39;ROOT&#39;) DEFAULT &#39;EXACT&#39;&lt;br&gt;is_active : TINYINT(1) DEFAULT 1 INDEX&lt;br&gt;created_at : TIMESTAMP NULL&lt;br&gt;updated_at : TIMESTAMP NULL&lt;br&gt;&lt;br&gt;Sin relación con otra tabla." vertex="1">
+          <mxGeometry height="245" width="380" x="2570" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="polyNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#EF6C00;align=left;verticalAlign=middle;spacing=10;fontSize=12;" value="&lt;b&gt;Referencias polimórficas&lt;/b&gt;&lt;br&gt;`posts.reference_type` puede ser: sighting, route, trip, place, species o general.&lt;br&gt;`reports.target_type` puede ser: post, comment, sighting o identification.&lt;br&gt;No existe una tabla actual para trip ni identification." vertex="1">
+          <mxGeometry height="180" width="510" x="3010" y="955" as="geometry" />
+        </mxCell>
+        <mxCell id="relationsNote" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;align=left;verticalAlign=middle;spacing=10;fontSize=12;" value="&lt;b&gt;Cardinalidades usadas&lt;/b&gt;&lt;br&gt;Una fila que contiene una referencia no nula apunta a una entidad (1). La entidad referida puede aparecer en cero o muchas filas (0..N).&lt;br&gt;&lt;br&gt;Las líneas punteadas no garantizan integridad referencial en MySQL: se aplican mediante el código del servicio." vertex="1">
+          <mxGeometry height="145" width="600" x="80" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="h-users" parent="1" style="rounded=0;html=1;fillColor=#0D47A1;strokeColor=#0D47A1;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="users" vertex="1"><mxGeometry x="70" y="185" width="320" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-refresh" parent="1" style="rounded=0;html=1;fillColor=#0D47A1;strokeColor=#0D47A1;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="refresh_tokens" vertex="1"><mxGeometry x="450" y="185" width="330" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-reset" parent="1" style="rounded=0;html=1;fillColor=#0D47A1;strokeColor=#0D47A1;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="password_reset_tokens" vertex="1"><mxGeometry x="440" y="440" width="330" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-sessions" parent="1" style="rounded=0;html=1;fillColor=#0D47A1;strokeColor=#0D47A1;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="sessions" vertex="1"><mxGeometry x="70" y="630" width="320" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-species" parent="1" style="rounded=0;html=1;fillColor=#4A148C;strokeColor=#4A148C;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="species" vertex="1"><mxGeometry x="900" y="185" width="455" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-sightings" parent="1" style="rounded=0;html=1;fillColor=#8D6E00;strokeColor=#8D6E00;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="sightings" vertex="1"><mxGeometry x="1485" y="185" width="380" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-places" parent="1" style="rounded=0;html=1;fillColor=#8D6E00;strokeColor=#8D6E00;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="places" vertex="1"><mxGeometry x="1910" y="185" width="270" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-routes" parent="1" style="rounded=0;html=1;fillColor=#8D6E00;strokeColor=#8D6E00;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="birding_routes" vertex="1"><mxGeometry x="2220" y="185" width="245" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-posts" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="posts" vertex="1"><mxGeometry x="80" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-comments" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="comments" vertex="1"><mxGeometry x="435" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-reactions" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="reactions" vertex="1"><mxGeometry x="790" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-follows" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="follows" vertex="1"><mxGeometry x="1145" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-reports" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="reports" vertex="1"><mxGeometry x="1500" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-audit" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="audit_records" vertex="1"><mxGeometry x="1855" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-notifications" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="notifications" vertex="1"><mxGeometry x="2210" y="955" width="305" height="26" as="geometry"/></mxCell>
+        <mxCell id="h-blocked" parent="1" style="rounded=0;html=1;fillColor=#880E4F;strokeColor=#880E4F;fontColor=#FFFFFF;fontStyle=1;fontSize=14;align=left;verticalAlign=middle;spacingLeft=10;" value="blocked_terms" vertex="1"><mxGeometry x="2570" y="955" width="380" height="26" as="geometry"/></mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeWidth=2;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="refresh" value="FK física · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="sightings" value="REF lógica · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="species" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="sightings" value="REF lógica · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="places" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="routes" value="REF lógica · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="posts" value="REF · 1 : 0..N (autor)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="comments" value="REF · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="comments" value="REF · 1 : 0..N (autor)">
+          <mxGeometry relative="1" x="-0.0246" y="2" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="587.5" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="reactions" value="REF · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="reactions" value="REF · 1 : 0..N (usuario)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="follows" value="REF · 1 : 0..N (seguidor)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="follows" value="REF · 1 : 0..N (seguido)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="990" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="reports" value="REF · 1 : 0..N (reportante)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="audit" value="REF · 1 : 0..N (actor)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="users" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="notifications" value="REF · 1 : 0..N (destinatario)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="notifications" value="REF condicional · 1 : 0..N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="reports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="audit" value="REF · 1 : 0..N (moderación)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="species" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="sightings" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="places" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="posts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="routes" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="reports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="posts" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="reports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="comments" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="reports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=7 5;endArrow=block;strokeColor=#EF6C00;fontColor=#EF6C00;fontSize=11;" target="sightings" value="REF polimórfica">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -3,14 +3,21 @@
   <div class="row g-5 mt-1 align-items-center">
     <div class="col-lg-5">
       <div class="species-detail-art">
-        <span>⌁</span>
+        <img
+          [src]="speciesImageUrl(selectedSpecies())"
+          [alt]="'Imagen de ' + selectedSpecies().common_name"
+        />
         <p>Ficha de especie</p>
       </div>
     </div>
     <div class="col-lg-7">
-      <p class="eyebrow text-forest">CATÁLOGO CURADO</p>
+      <p class="eyebrow text-forest">INFORMACION DE LA ESPECIE</p>
       <h1>{{ selectedSpecies().common_name }}</h1>
-      <em class="fs-5">{{ selectedSpecies().scientific_name }}</em>
+      <div class="scientific-name">
+        <small>Nombre científico</small>
+        <em>{{ selectedSpecies().scientific_name }}</em>
+      </div>
+
       <p class="lead mt-4">{{ selectedSpecies().description }}</p>
       <div class="fact-grid">
         <div>
@@ -18,10 +25,10 @@
           ><b>{{ selectedSpecies().habitat || "Por documentar" }}</b>
         </div>
         <div>
-          <small>Conservación</small
-          ><b
-            >{{ selectedSpecies().conservation_status || "Sin clasificar" }}</b
-          >
+          <small>Conservación</small>
+          <b>
+            {{ selectedSpecies().conservation_status || "Sin clasificar" }}
+          </b>
         </div>
         <div>
           <small>Ubicación pública</small

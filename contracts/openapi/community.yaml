@@ -17,7 +17,11 @@ paths:
       {
         summary: Create a post referring to an opaque domain id,
         security: [{ bearerAuth: [] }],
-        responses: { "201": { description: Created } },
+        responses:
+          {
+            "201": { description: Created },
+            "422": { description: Text contains language rejected by Community moderation },
+          },
       }
   /api/community/v1/posts/{post}/comments:
     post:
@@ -25,7 +29,11 @@ paths:
         summary: Comment on a post,
         security: [{ bearerAuth: [] }],
         parameters: [{ $ref: "#/components/parameters/post" }],
-        responses: { "201": { description: Created } },
+        responses:
+          {
+            "201": { description: Created },
+            "422": { description: Text contains language rejected by Community moderation },
+          },
       }
   /api/community/v1/posts/{post}/reaction:
     put:

@@ -65,7 +65,7 @@ routes/api.php -> Controller -> Request / Domain service -> Model o DB
 
 ## Community
 
-`CommunityController` mantiene publicaciones, comentarios, reacciones, seguimientos, reportes, auditoría y notificaciones en su propia base. Las referencias a especies, rutas o avistamientos son identificadores opacos: Community no hace joins ni modificaciones en otros contextos.
+`CommunityController` mantiene publicaciones, comentarios, reacciones, seguimientos, reportes, auditoría y notificaciones en su propia base. `ContentModerationService` evalúa el vocabulario activo de `blocked_terms` mediante la regla `NoProfanity` antes de persistir publicaciones o comentarios; el texto rechazado no se guarda. Consulta [la guía del filtro de lenguaje](content-moderation-guide.md) para su normalización, operación y pruebas. Las referencias a especies, rutas o avistamientos son identificadores opacos: Community no hace joins ni modificaciones en otros contextos.
 
 ## Persistencia y pruebas
 

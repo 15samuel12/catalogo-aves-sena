@@ -5,9 +5,16 @@
   place-items: center;
   overflow: hidden;
   border-radius: var(--radius);
-  background: linear-gradient(145deg, #b8dfae, #93cbb6);
+  background: linear-gradient(145deg, #e4f1e2, #e3faf2);
   color: #18533b;
   box-shadow: var(--shadow);
+}
+.species-detail-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .species-detail-art::after {
   position: absolute;
@@ -33,6 +40,26 @@
   left: 1.5rem;
   margin: 0;
   font-weight: 750;
+}
+.scientific-name {
+  display: grid;
+  margin-top: 0.85rem;
+}
+.scientific-name small {
+  color: var(--muted);
+  font-size: 0.52rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.scientific-name em {
+  display: inline-block;
+  color: var(--forest);
+  font-size: 1.15rem;
+  line-height: 1.1;
+  margin-top: -0.08rem;
+  margin-left: 0.5rem;
 }
 .fact-grid {
   display: grid;

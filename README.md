@@ -25,6 +25,7 @@ Para ubicar rápidamente cada componente, servicio, modelo y regla de dominio, c
 - [Arquitectura de software](docs/architecture.md): componentes, flujos, límites y decisiones de seguridad.
 - [Estructura del frontend](docs/frontend-architecture.md): ubicación de páginas, clientes HTTP y reglas de dependencia.
 - [Capas de los servicios Laravel](docs/backend-application-layers.md) y [guía de código](docs/service-code-guide.md).
+- [Filtro de lenguaje no permitido](docs/content-moderation-guide.md): vocabulario configurable, normalización y validación de Community; consulta también sus [cambios de implementación](docs/content-moderation-changes.md).
 - [Almacenamiento de multimedia](docs/media-storage.md): discos privados, propiedad y reglas para futuras cargas.
 - [Guía de desarrollo](docs/development-guide.md): cómo añadir pantallas, endpoints y pruebas.
 - [Límites de servicio](docs/service-boundaries.md), [decisiones (ADR)](docs/decisions.md) y contratos [OpenAPI](contracts/openapi/).

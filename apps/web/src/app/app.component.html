@@ -12,8 +12,64 @@
     </div>
     <div class="nav-actions">
       @if (session.user(); as user) {
-        <a class="profile-link" routerLink="/perfil">{{ user.name }}</a
-        ><button class="logout" (click)="logout()">Salir</button>
+        <div class="profile-menu">
+          <button
+            class="profile-trigger"
+            type="button"
+            [attr.aria-expanded]="accountMenuOpen()"
+            aria-haspopup="menu"
+            (click)="toggleAccountMenu()"
+          >
+            {{ user.name }}
+          </button>
+          @if (accountMenuOpen()) {
+            <div
+              class="account-dropdown"
+              role="menu"
+              aria-label="Menú de cuenta"
+            >
+              <a
+                routerLink="/perfil"
+                role="menuitem"
+                (click)="closeAccountMenu()"
+                >Mi perfil</a
+              >
+              <a
+                routerLink="/avistamientos"
+                role="menuitem"
+                (click)="closeAccountMenu()"
+                >Mi bitácora</a
+              >
+
+              <a
+                routerLink="/notificaciones"
+                role="menuitem"
+                (click)="closeAccountMenu()"
+                >Notificaciones</a
+              >
+              @if (isAdministrator(user.role)) {
+                <div class="menu-divider" role="separator"></div>
+
+                <a
+                  routerLink="/administracion"
+                  role="menuitem"
+                  (click)="closeAccountMenu()"
+                  >Administración</a
+                >
+                <a
+                  routerLink="/moderacion"
+                  role="menuitem"
+                  (click)="closeAccountMenu()"
+                  >Moderación</a
+                >
+              }
+              <div class="menu-divider" role="separator"></div>
+              <button type="button" role="menuitem" (click)="logout()">
+                Cerrar sesión
+              </button>
+            </div>
+          }
+        </div>
       } @else {
         <a class="login-link" routerLink="/ingresar">Ingresar</a>
         <a class="record-link" routerLink="/avistamientos/nuevo"
