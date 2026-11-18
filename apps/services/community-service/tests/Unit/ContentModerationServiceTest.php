@@ -56,6 +56,6 @@ class ContentModerationServiceTest extends TestCase
             },
         );
 
-        $this->assertSame(['El contenido contiene lenguaje no permitido. Reformúlalo con respeto.'], $errors);
+        $this->assertSame(['El contenido contiene lenguaje no cumple con las norma de la comunidad. Reformúlalo con respeto.'], $errors);
     }
 }

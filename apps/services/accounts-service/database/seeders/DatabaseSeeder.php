@@ -14,21 +14,94 @@ class DatabaseSeeder extends Seeder
     {
         $now = now();
         $people = [
-            ['Mariana Torres', 'mariana.torres@catalogo-aves.local', 'user', 'Bogotá, Colombia', 'Observadora de bosque andino y aprendiz de fotografía de naturaleza.'],
-            ['Tomás Rojas', 'tomas.rojas@catalogo-aves.local', 'user', 'Chingaza, Colombia', 'Guía local interesado en aves altoandinas y restauración ecológica.'],
-            ['Elena Cárdenas', 'elena.cardenas@catalogo-aves.local', 'curator', 'Medellín, Colombia', 'Bióloga y curadora de registros para la comunidad de Catálogo de Aves.'],
-            ['Samuel Pardo', 'samuel.pardo@catalogo-aves.local', 'moderator', 'Cali, Colombia', 'Moderador comunitario y observador de humedales urbanos.'],
-            ['Lucía Herrera', 'lucia.herrera@catalogo-aves.local', 'user', 'Manizales, Colombia', 'Exploro senderos de niebla, especialmente al amanecer.'],
-            ['David Salazar', 'david.salazar@catalogo-aves.local', 'user', 'Pereira, Colombia', 'Aficionado a los colibríes y a registrar cantos de aves.'],
-            ['Natalia Vélez', 'natalia.velez@catalogo-aves.local', 'user', 'Ibagué, Colombia', 'Naturalista de fin de semana y amante de las caminatas lentas.'],
-            ['Camilo Duarte', 'camilo.duarte@catalogo-aves.local', 'user', 'Tunja, Colombia', 'Registro aves de páramo y participo en salidas de ciencia ciudadana.'],
-            ['Sara Molina', 'sara.molina@catalogo-aves.local', 'user', 'Villa de Leyva, Colombia', 'Interesada en migratorias y conservación de paisajes secos.'],
-            ['Juan Esteban Gil', 'juan.gil@catalogo-aves.local', 'admin', 'Bogotá, Colombia', 'Administrador de la comunidad y responsable de operaciones.'],
-            ['Valeria Muñoz', 'valeria.munoz@catalogo-aves.local', 'user', 'Santander, Colombia', 'Aves, ilustración naturalista y recorridos de río.'],
-            ['Andrés Nieto', 'andres.nieto@catalogo-aves.local', 'user', 'Leticia, Colombia', 'Observador amazónico y defensor de la observación responsable.'],
+            [
+                'name' => 'Mariana Torres',
+                'email' => 'mariana.torres@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Bogotá, Colombia',
+                'bio' => 'Observadora de bosque andino y aprendiz de fotografía de naturaleza.',
+            ],
+            [
+                'name' => 'Tomás Rojas',
+                'email' => 'tomas.rojas@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Chingaza, Colombia',
+                'bio' => 'Guía local interesado en aves altoandinas y restauración ecológica.',
+            ],
+            [
+                'name' => 'Elena Cárdenas',
+                'email' => 'elena.cardenas@catalogo-aves.local',
+                'role' => 'curator',
+                'location' => 'Medellín, Colombia',
+                'bio' => 'Bióloga y curadora de registros para la comunidad de Catálogo de Aves.',
+            ],
+            [
+                'name' => 'Samuel Pardo',
+                'email' => 'samuel.pardo@catalogo-aves.local',
+                'role' => 'moderator',
+                'location' => 'Cali, Colombia',
+                'bio' => 'Moderador comunitario y observador de humedales urbanos.',
+            ],
+            [
+                'name' => 'Lucía Herrera',
+                'email' => 'lucia.herrera@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Manizales, Colombia',
+                'bio' => 'Exploro senderos de niebla, especialmente al amanecer.',
+            ],
+            [
+                'name' => 'David Salazar',
+                'email' => 'david.salazar@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Pereira, Colombia',
+                'bio' => 'Aficionado a los colibríes y a registrar cantos de aves.',
+            ],
+            [
+                'name' => 'Natalia Vélez',
+                'email' => 'natalia.velez@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Ibagué, Colombia',
+                'bio' => 'Naturalista de fin de semana y amante de las caminatas lentas.',
+            ],
+            [
+                'name' => 'Camilo Duarte',
+                'email' => 'camilo.duarte@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Tunja, Colombia',
+                'bio' => 'Registro aves de páramo y participo en salidas de ciencia ciudadana.',
+            ],
+            [
+                'name' => 'Sara Molina',
+                'email' => 'sara.molina@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Villa de Leyva, Colombia',
+                'bio' => 'Interesada en migratorias y conservación de paisajes secos.',
+            ],
+            [
+                'name' => 'Juan Esteban Gil',
+                'email' => 'juan.gil@catalogo-aves.local',
+                'role' => 'admin',
+                'location' => 'Bogotá, Colombia',
+                'bio' => 'Administrador de la comunidad y responsable de operaciones.',
+            ],
+            [
+                'name' => 'Valeria Muñoz',
+                'email' => 'valeria.munoz@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Santander, Colombia',
+                'bio' => 'Aves, ilustración naturalista y recorridos de río.',
+            ],
+            [
+                'name' => 'Andrés Nieto',
+                'email' => 'andres.nieto@catalogo-aves.local',
+                'role' => 'user',
+                'location' => 'Leticia, Colombia',
+                'bio' => 'Observador amazónico y defensor de la observación responsable.',
+            ],
         ];
 
-        foreach ($people as $index => [$name, $email, $role, $location, $bio]) {
+        foreach ($people as $index => $personData) {
+            ['name' => $name, 'email' => $email, 'role' => $role, 'location' => $location, 'bio' => $bio] = $personData;
             $id = $this->externalId($index + 1);
 
             /*
